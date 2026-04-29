@@ -37,7 +37,8 @@ export async function extractRowsFromImage(
   mimeType: string
 ): Promise<MatchRow[]> {
   const client = getClient();
-  const model = client.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const modelName = process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
+  const model = client.getGenerativeModel({ model: modelName });
 
   const result = await model.generateContent([
     PROMPT,
